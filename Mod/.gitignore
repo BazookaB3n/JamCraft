@@ -23,3 +23,6 @@ run
 
 # Libraries
 lib
+
+# Gradle Wrapper
+gradle
