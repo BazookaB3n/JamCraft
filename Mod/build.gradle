@@ -28,8 +28,8 @@ plugins {
 }
 */
 version = "1.0.1"
-group= "com.retrotechie.musicmod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "musicmod"
+group= "com.retrotechie.jamcraft" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "jamcraft"
 
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"

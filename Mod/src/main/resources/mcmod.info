@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "JamCraft",
+  "name": "JamCraft",
+  "description": "JamCraft is a mod that allows users to play music directly from their Minecraft client",
   "version": "${version}",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["BazookaB3n"],
+  "credits": "Anyone who were involved in the development and release of the mod",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []

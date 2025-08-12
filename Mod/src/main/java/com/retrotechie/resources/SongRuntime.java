@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import com.retrotechie.MusicJam.SongUtils;
 
 import com.retrotechie.MusicJam.MainJam;
 
@@ -18,15 +19,16 @@ public class SongRuntime {
     private static final ExecutorService executor = Executors.newSingleThreadExecutor();
 	
 	public static void getOGG(String URL) {
-		Future<File> futureMP4 = SongGrabber.getYTDLPAudio(URL);
+		SongUtils utils = new SongGrabber();
+		Future<File> futureMP4 = utils.downloadSong(URL);
 		
 		new Thread(() -> {
 
 			    try {
-			        File mp4File = futureMP4.get(); // wait for download to finish
-			        System.out.println("MP4 downloaded to: " + mp4File.getAbsolutePath());
+			        File mp3File = futureMP4.get(); // wait for download to finish
+			        System.out.println("MP3 downloaded to: " + mp3File.getAbsolutePath());
 			        
-		    		Future<File> futureOGG = SongRuntime.convertFile(mp4File);
+		    		Future<File> futureOGG = SongRuntime.convertFile(mp3File);
 		    		File oggFile = futureOGG.get();
 		    		System.out.println("OGG downloaded to: " + oggFile.getAbsolutePath());
 		    		
@@ -42,7 +44,8 @@ public class SongRuntime {
 	}
 	
 	public static void getOGGPlaylist(String URL) {
-		Future<List<File>> futureMP4s = SongGrabber.getYTDLPPlaylist(URL);
+		SongUtils utils = new SongGrabber();
+		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL);
 		
 		new Thread(() -> {
 			try {

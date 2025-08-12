@@ -8,31 +8,28 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.retrotechie.MusicJam.SongUtils;
 import com.retrotechie.MusicJam.MainJam;
 
-public class SongGrabber {
+public class SongGrabber extends SongUtils {
 
 	public static File outputDir = new File("assets/retrotechie/mp4/");
 	static List<File>result = null;
 
-	
-    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
-    static String videoID;
-    
-    public static Future<File> getYTDLPAudio(String videoUrl) {
+	@Override
+	public Future<File> downloadSong(String videoPrompt) {
         return executor.submit(() -> {
         	//Download Video using YT-DLP
-        	String[] videoDownloadLine = {MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoID + ".mp4").getAbsolutePath(), videoUrl};
-        	String videoID = videoUrl.replace("https://www.youtube.com/watch?v=", "");
+        	String videoID = videoPrompt.replace("https://www.youtube.com/watch?v=", "");
         	SongGrabber.videoID = videoID;
         	System.out.println("Video File Name: " + videoID);
 		    //uses YT-DLP To grab the video based on the url.
-		    ProcessBuilder pb = new ProcessBuilder(videoDownloadLine);  
+		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoID + ".mp4").getAbsolutePath(), videoPrompt);  
 
             pb.redirectErrorStream(true);// combine stderr and stdout
             Process process = pb.start();
             int exitCode = process.waitFor();
-            if (exitCode != 0) {
+            if (exitCode != 0 && exitCode != 1) {
                 throw new RuntimeException("yt-dlp failed with code " + exitCode);
             }
 
@@ -51,15 +48,19 @@ public class SongGrabber {
 
             return result; // return the .mp4 file 
         });
-    }
-
-    public static Future<List<File>> getYTDLPPlaylist(String playlistURL){
+	}
+	
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+    static String videoID;
+    
+    @Override
+    public Future<List<File>> downloadPlaylist(String playlistPrompt) {
     	return executor.submit(() -> {
     	    final Pattern PLAYLIST_ID_PATTERN = Pattern.compile("[?&]list=([A-Za-z0-9_-]+)");
-    		String playlistID = extractID(playlistURL, PLAYLIST_ID_PATTERN);
+    		String playlistID = extractID(playlistPrompt, PLAYLIST_ID_PATTERN);
     		File playlistOutputDir = new File(outputDir + "%(playlist_id)s/");
     		SongRuntime.playlistOutputDir = new File(SongRuntime.outputDir + playlistID);
-    		String[] playlistDownloadLine = {MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(playlistOutputDir, "%(playlist_id)s-%(id)s.%(ext)s").getAbsolutePath(), playlistURL};
+    		String[] playlistDownloadLine = {MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(playlistOutputDir, "%(playlist_id)s-%(id)s.%(ext)s").getAbsolutePath(), playlistPrompt};
     		System.out.println("Playlist ID: " + playlistID);
     		ProcessBuilder pb = new ProcessBuilder(playlistDownloadLine);
     		

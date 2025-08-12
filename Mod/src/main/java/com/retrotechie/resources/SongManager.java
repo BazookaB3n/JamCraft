@@ -12,7 +12,7 @@ public class SongManager {
 	
 	//If the song is paused or not
     public static boolean paused = false;
-    public static String queueID = "MusicMod_Music";
+    public static String queueID = "JamCraft_Music";
     public static boolean shuffle = false;
     
 	//Gets minecrafts sound system and returns it. 

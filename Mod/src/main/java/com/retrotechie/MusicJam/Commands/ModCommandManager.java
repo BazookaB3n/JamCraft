@@ -16,9 +16,11 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
+
+
 public class ModCommandManager extends CommandBase {
 	
-    String[] cmdAliases = {"musicmod", "mm", "music"};
+    String[] cmdAliases = {"jc", "jam", "jcraft"};
 
     private final Map<String, ICommandHandler> subcommands = new HashMap<>();
     
@@ -43,19 +45,19 @@ public class ModCommandManager extends CommandBase {
 	@Override
 	public String getCommandName() {
 		// What is the command name (what do you put after '/'?"
-		return "musicmod";
+		return "jamcraft";
 	}
 
 	@Override
 	public String getCommandUsage(ICommandSender sender) {
 		// TODO Auto-generated method stub
-		return "Allows you to configure the Mod \nand any other features available through it";
+		return "Allows you to use all of the mods features.\nalso allows you to configure the mod \nand any other features available through it";
 	}
 
 	@Override
 	public void processCommand(ICommandSender commandSender, String[] args) throws CommandException {
 		if (args.length == 0) {
-			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To MusicMod! \n" + EnumChatFormatting.DARK_RED + "No arguments were entered, please try again!"));
+			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "No arguments were entered, please try again!"));
 			return;
 		}
 		
@@ -63,7 +65,7 @@ public class ModCommandManager extends CommandBase {
 		if(args.length >= 1 && handler != null) {	
 			handler.execute(commandSender, args);
 		} else {
-			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To MusicMod! \n" + EnumChatFormatting.DARK_RED + "The following arguments were not recognized: " + EnumChatFormatting.BOLD + args[0]));
+			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "The following arguments were not recognized: " + EnumChatFormatting.BOLD + args[0]));
 		}
 	}
 	
@@ -92,7 +94,7 @@ public class ModCommandManager extends CommandBase {
 				    	//Checks if volume is between 0-100.
 				    	MainJam.musicVolume = (float)(volume)/100;
 				    	System.out.println("New volume level: " + volume + "% volume");
-						commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Volume level has been adjusted! New volume level: " + EnumChatFormatting.BOLD + EnumChatFormatting.ITALIC + MainJam.musicVolume));
+						commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Volume level has been adjusted! New volume level: " + EnumChatFormatting.BOLD + EnumChatFormatting.ITALIC + (int) (MainJam.musicVolume * 100)));
 				    } else {
 				    	//Sends a message that the volume was either too high or too low if the values are out of range. 
 						commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "Invalid Volume Arguments! Please enter a number between 1-100!"));
@@ -155,7 +157,7 @@ public class ModCommandManager extends CommandBase {
     }
     
     private void clearSongs(ICommandSender commandSender, String[] args) {
-    	commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "This command can only delete files from previous sessions! \n" + EnumChatFormatting.BOLD + "To remove files from this session, relaunch the game. "));
+    	commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "This command can only delete files from previous sessions! \n" + EnumChatFormatting.BOLD + EnumChatFormatting.RED + "To remove files from this session, relaunch the game. "));
     	if(args.length > 1) {
     		if(args[1].toLowerCase().equals("all"))     {
     			cleanDirectory(SongRuntime.outputDir);

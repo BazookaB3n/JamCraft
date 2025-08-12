@@ -22,8 +22,8 @@ public class MainJam
 	@Instance("Music Mod")
 	public static MainJam instance;
 	
-    public static final String MODID = "Music Mod";
-    public static final String VERSION = "1.0.1";
+    public static final String MODID = "JamCraft";
+    public static final String VERSION = "0.0.1";
     
     public static boolean doPlay = true;
     public static float musicVolume = 1;
