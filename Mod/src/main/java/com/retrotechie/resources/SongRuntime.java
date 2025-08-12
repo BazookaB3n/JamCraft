@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import com.retrotechie.MusicJam.SongUtils;
+import com.retrotechie.MusicJam.Utilities.SongUtils;
 
 import com.retrotechie.MusicJam.MainJam;
+import com.retrotechie.MusicJam.Song;
 
 import net.minecraft.client.Minecraft;
 
@@ -20,10 +21,10 @@ public class SongRuntime {
 	
 	public static void getOGG(String URL) {
 		SongUtils utils = new SongGrabber();
-		Future<File> futureMP4 = utils.downloadSong(URL);
+    	String videoTitle = SongGrabber.getVideoTitle(URL);
+		Future<File> futureMP4 = utils.downloadSong(URL, videoTitle);
 		
 		new Thread(() -> {
-
 			    try {
 			        File mp3File = futureMP4.get(); // wait for download to finish
 			        System.out.println("MP3 downloaded to: " + mp3File.getAbsolutePath());
@@ -34,7 +35,7 @@ public class SongRuntime {
 		    		
 			        //Pass song file to next method, which will invoke the song into the sound system. 
 			        Minecraft.getMinecraft().addScheduledTask(() -> {
-			        	SongManager.PlaySong(oggFile.getAbsolutePath());
+			        	SongManager.PlaySong(new Song(oggFile, oggFile.getName()));
 			        });
 
 			    } catch (Exception e) {
@@ -45,7 +46,7 @@ public class SongRuntime {
 	
 	public static void getOGGPlaylist(String URL) {
 		SongUtils utils = new SongGrabber();
-		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL);
+		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL,);
 		
 		new Thread(() -> {
 			try {

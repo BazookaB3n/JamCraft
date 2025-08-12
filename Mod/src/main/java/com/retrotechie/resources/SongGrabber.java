@@ -1,6 +1,8 @@
 package com.retrotechie.resources;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -8,23 +10,24 @@ import java.util.concurrent.Future;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.retrotechie.MusicJam.SongUtils;
 import com.retrotechie.MusicJam.MainJam;
+import com.retrotechie.MusicJam.Utilities.SongUtils;
 
 public class SongGrabber extends SongUtils {
 
 	public static File outputDir = new File("assets/retrotechie/mp4/");
 	static List<File>result = null;
+    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
+    static String videoTitle;
 
 	@Override
-	public Future<File> downloadSong(String videoPrompt) {
+	public Future<File> downloadSong(String videoPrompt, String videoTitle) {
         return executor.submit(() -> {
         	//Download Video using YT-DLP
         	String videoID = videoPrompt.replace("https://www.youtube.com/watch?v=", "");
-        	SongGrabber.videoID = videoID;
-        	System.out.println("Video File Name: " + videoID);
+        	System.out.println("Video Title: " + videoTitle);
 		    //uses YT-DLP To grab the video based on the url.
-		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoID + ".mp4").getAbsolutePath(), videoPrompt);  
+		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoTitle + ".mp4").getAbsolutePath(), videoPrompt);  
 
             pb.redirectErrorStream(true);// combine stderr and stdout
             Process process = pb.start();
@@ -49,12 +52,9 @@ public class SongGrabber extends SongUtils {
             return result; // return the .mp4 file 
         });
 	}
-	
-    private static final ExecutorService executor = Executors.newSingleThreadExecutor();
-    static String videoID;
     
     @Override
-    public Future<List<File>> downloadPlaylist(String playlistPrompt) {
+    public Future<List<File>> downloadPlaylist(String playlistPrompt, String playlistTitle) {
     	return executor.submit(() -> {
     	    final Pattern PLAYLIST_ID_PATTERN = Pattern.compile("[?&]list=([A-Za-z0-9_-]+)");
     		String playlistID = extractID(playlistPrompt, PLAYLIST_ID_PATTERN);
@@ -99,5 +99,26 @@ public class SongGrabber extends SongUtils {
     	
     	return null;
     }
-}
+    
+    public static String getVideoTitle(String URL) {
+		 StringBuilder title = new StringBuilder();
+		 try {
+			 ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "--get-title", "--no-warnings", URL);
+             pb.redirectErrorStream(true);
+             Process process = pb.start();
+
+             try (BufferedReader reader = new BufferedReader(
+            		 new InputStreamReader(process.getInputStream()))) {
+            	 String line;
+            	 while ((line = reader.readLine()) != null) {
+            		 title.append(line);
+            	 }
+             }
+             process.waitFor();
+		 } catch (Exception e) {
+			 e.printStackTrace();
+		 }
+		 return title.toString();
+    }
+}	
 

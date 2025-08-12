@@ -3,7 +3,7 @@
   "modid": "JamCraft",
   "name": "JamCraft",
   "description": "JamCraft is a mod that allows users to play music directly from their Minecraft client",
-  "version": "${version}",
+  "version": "0.0.1",
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",

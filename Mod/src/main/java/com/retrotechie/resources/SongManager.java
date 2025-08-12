@@ -5,6 +5,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Random;
 
+import com.retrotechie.MusicJam.Song;
+import com.retrotechie.MusicJam.Utilities.QueueUtils;
+
 import net.minecraft.client.Minecraft;
 import paulscode.sound.SoundSystem;
 
@@ -12,7 +15,9 @@ public class SongManager {
 	
 	//If the song is paused or not
     public static boolean paused = false;
-    public static String queueID = "JamCraft_Music";
+    
+    static String QueueID = "JamCraft_Queue";
+    
     public static boolean shuffle = false;
     
 	//Gets minecrafts sound system and returns it. 
@@ -37,8 +42,8 @@ public class SongManager {
 	
 	
 	//Adds a song to the song queue
-	public static void PlaySong(String filePath) {
-		File ogg = new File(filePath);
+	public static void PlaySong(Song song) {
+		File ogg = song.getSongFile();
 		SoundSystem soundSystem = getSoundSystem();
 		System.out.println("Does the file Exist: " + ogg);
 		
@@ -47,13 +52,16 @@ public class SongManager {
 			return;
 		}
 		
+        QueueUtils.queue.offer(song); // offer() is safer than add()
+        System.out.println(song + " added to queue.");
+        
 		try {
-			if(soundSystem.playing(queueID)) {
-	            soundSystem.queueSound(queueID, ogg.toURI().toURL(), ogg.getName());
+			if(soundSystem.playing(QueueID)) {
+	            soundSystem.queueSound(QueueID, ogg.toURI().toURL(), ogg.getName());
 			} else {
-            soundSystem.newStreamingSource(true, queueID, ogg.toURI().toURL(), ogg.getName(), false, 0, 0, 0, paulscode.sound.SoundSystemConfig.ATTENUATION_NONE, 0);
+            soundSystem.newStreamingSource(true, QueueID, ogg.toURI().toURL(), ogg.getName(), false, 0, 0, 0, paulscode.sound.SoundSystemConfig.ATTENUATION_NONE, 0);
             
-            soundSystem.play(queueID);
+            soundSystem.play(QueueID);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -74,7 +82,7 @@ public class SongManager {
 				int index = random.nextInt(FilePaths.size());
 				File ogg = new File(FilePaths.get(index));
 	            try {
-					soundSystem.queueSound(queueID, ogg.toURI().toURL(), ogg.getName());
+					soundSystem.queueSound(QueueID, ogg.toURI().toURL(), ogg.getName());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -87,7 +95,7 @@ public class SongManager {
 	public static void pauseSong() {
 		SoundSystem soundSystem = getSoundSystem();
 		paused = true;
-		soundSystem.pause(queueID);
+		soundSystem.pause(QueueID);
 	}
 	
 	//Resumes the song if it is not currently playing. 
@@ -95,7 +103,7 @@ public class SongManager {
 		if(paused) {
 			SoundSystem soundSystem = getSoundSystem();
 			paused = false;
-			soundSystem.play(queueID);
+			soundSystem.play(QueueID);
 		}
 	}
 }
