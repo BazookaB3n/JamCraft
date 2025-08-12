@@ -11,7 +11,7 @@ Some planned features include: <ul>
 <li>Ability to upload your own MP3 files and play them directly into minecraft. </li>
 <li>Volume control, Queueing features, and many more music controls. </li>
 <li>And so much more!</li>
-</ul><br>
+</ul>
 <hr>
 I am looking to get this project into beta at some point in the near future. Also, feel free to send your suggestions to me, I'm always open to ideas!
 <br>
