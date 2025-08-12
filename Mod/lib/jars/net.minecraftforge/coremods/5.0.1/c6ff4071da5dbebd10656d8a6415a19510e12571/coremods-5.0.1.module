@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "net.minecraftforge",
+    "module": "coremods",
+    "version": "5.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.0.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 16,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "coremods-5.0.1.jar",
+          "url": "coremods-5.0.1.jar",
+          "size": 24199,
+          "sha512": "c8550f9433e14bdccf551259274c2370075931cfbb738beac2966f1c91c0e69b9226110234c9806e936ea5e7cd4160365e3a7fcc46df665db40c4290d12220a9",
+          "sha256": "a0678f4d444c9d9ac816f91638308604576aa1297168e33a154538d1acc0c1ac",
+          "sha1": "386b00279628b105b2d507539c46e134e96f6237",
+          "md5": "8c590051c5d65e098ca7c2e3ddf803a8"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 16,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "cpw.mods",
+          "module": "modlauncher",
+          "version": {
+            "requires": "9.0.+"
+          }
+        },
+        {
+          "group": "org.apache.logging.log4j",
+          "module": "log4j-api",
+          "version": {
+            "requires": "2.14.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-commons",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-tree",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "org.ow2.asm",
+          "module": "asm-util",
+          "version": {
+            "requires": "9.1"
+          }
+        },
+        {
+          "group": "net.minecraftforge",
+          "module": "forgespi",
+          "version": {
+            "requires": "4.0.+"
+          }
+        },
+        {
+          "group": "org.openjdk.nashorn",
+          "module": "nashorn-core",
+          "version": {
+            "requires": "15.1.1"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "coremods-5.0.1.jar",
+          "url": "coremods-5.0.1.jar",
+          "size": 24199,
+          "sha512": "c8550f9433e14bdccf551259274c2370075931cfbb738beac2966f1c91c0e69b9226110234c9806e936ea5e7cd4160365e3a7fcc46df665db40c4290d12220a9",
+          "sha256": "a0678f4d444c9d9ac816f91638308604576aa1297168e33a154538d1acc0c1ac",
+          "sha1": "386b00279628b105b2d507539c46e134e96f6237",
+          "md5": "8c590051c5d65e098ca7c2e3ddf803a8"
+        }
+      ]
+    }
+  ]
+}
