@@ -21,15 +21,14 @@ public class SongRuntime {
 	
 	public static void getOGG(String URL) {
 		SongUtils utils = new SongGrabber();
-    	String videoTitle = SongGrabber.getVideoTitle(URL);
-		Future<File> futureMP4 = utils.downloadSong(URL, videoTitle);
-		
 		new Thread(() -> {
 			    try {
-			        File mp3File = futureMP4.get(); // wait for download to finish
-			        System.out.println("MP3 downloaded to: " + mp3File.getAbsolutePath());
+			    	String videoTitle = SongGrabber.getVideoTitle(URL);
+					Future<File> futureMP4 = utils.downloadSong(URL, videoTitle);
+			        File mp4File = futureMP4.get(); // wait for download to finish
+			        System.out.println("MP4 downloaded to: " + mp4File.getAbsolutePath());
 			        
-		    		Future<File> futureOGG = SongRuntime.convertFile(mp3File);
+		    		Future<File> futureOGG = SongRuntime.convertFile(mp4File);
 		    		File oggFile = futureOGG.get();
 		    		System.out.println("OGG downloaded to: " + oggFile.getAbsolutePath());
 		    		
@@ -46,7 +45,7 @@ public class SongRuntime {
 	
 	public static void getOGGPlaylist(String URL) {
 		SongUtils utils = new SongGrabber();
-		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL,);
+		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL,"IDK");
 		
 		new Thread(() -> {
 			try {

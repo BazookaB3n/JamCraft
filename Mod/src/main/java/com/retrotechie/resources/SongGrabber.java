@@ -26,8 +26,9 @@ public class SongGrabber extends SongUtils {
         	//Download Video using YT-DLP
         	String videoID = videoPrompt.replace("https://www.youtube.com/watch?v=", "");
         	System.out.println("Video Title: " + videoTitle);
+
 		    //uses YT-DLP To grab the video based on the url.
-		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoTitle + ".mp4").getAbsolutePath(), videoPrompt);  
+		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoTitle.replace("/", "") + ".mp4").getAbsolutePath(), videoPrompt);  
 
             pb.redirectErrorStream(true);// combine stderr and stdout
             Process process = pb.start();
@@ -44,7 +45,7 @@ public class SongGrabber extends SongUtils {
 
             File result = null;
             for (File file : files) {
-                if (file.getName().contains(videoID)) {
+                if (file.getName().contains(videoTitle.replace("/", ""))) {
                     result = file;
                 }
             }

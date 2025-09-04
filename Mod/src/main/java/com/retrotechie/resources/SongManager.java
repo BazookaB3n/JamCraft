@@ -52,9 +52,8 @@ public class SongManager {
 			return;
 		}
 		
-        QueueUtils.queue.offer(song); // offer() is safer than add()
+        //QueueUtils.queue.offer(song); // offer() is safer than add()
         System.out.println(song + " added to queue.");
-        
 		try {
 			if(soundSystem.playing(QueueID)) {
 	            soundSystem.queueSound(QueueID, ogg.toURI().toURL(), ogg.getName());
