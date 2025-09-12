@@ -4,7 +4,7 @@ package com.retrotechie.MusicJam;
 
 import java.io.IOException;
 
-import com.retrotechie.MusicJam.Commands.ModCommandManager;
+import com.retrotechie.MusicJam.Commands.CommandManager;
 import com.retrotechie.resources.ResourceLoader;
 
 import net.minecraftforge.client.ClientCommandHandler;
@@ -36,7 +36,7 @@ public class MainJam
 	//Check OS type:
     public static String os = System.getProperty("os.name").toLowerCase();
 
-
+    CommandManager manager = new CommandManager();
 
     
     @EventHandler

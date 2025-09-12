@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import com.retrotechie.MusicJam.Song;
-import com.retrotechie.MusicJam.Utilities.QueueUtils;
-
 import net.minecraft.client.Minecraft;
 import paulscode.sound.SoundSystem;
 
