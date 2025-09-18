@@ -104,7 +104,10 @@ public class SongManager {
 		}
 	}
 	public static void setVolume(int Volume){
+		float fVol = (float) Volume;
+		fVol /= 100;
+		System.out.println("New volume (Float)" + fVol);
 		SoundSystem soundSystem = getSoundSystem();
-		soundSystem.setVolume(QueueID, Volume);
+		soundSystem.setVolume(QueueID, fVol);
 	}
 }
