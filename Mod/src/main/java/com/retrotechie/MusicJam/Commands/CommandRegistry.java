@@ -19,7 +19,7 @@ public class CommandRegistry {
 
         Command cmd = commands.get(input[0].toLowerCase());
         if (cmd != null) {
-            cmd.execute(Arrays.copyOfRange(input, 1, input.length), commandSender);
+            cmd.execute(Arrays.copyOfRange(input, 1, input.length));
         } else {
             System.out.println("Unknown command: " + input[0].toLowerCase());
         }

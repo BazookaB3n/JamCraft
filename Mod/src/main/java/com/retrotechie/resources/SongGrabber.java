@@ -24,13 +24,13 @@ public class SongGrabber extends SongUtils {
 	public Future<File> downloadSong(String videoPrompt, String videoTitle) {
         return executor.submit(() -> {
         	//Download Video using YT-DLP
-        	String videoID = videoPrompt.replace("https://www.youtube.com/watch?v=", "");
         	System.out.println("Video Title: " + videoTitle);
 
 		    //uses YT-DLP To grab the video based on the url.
 		    ProcessBuilder pb = new ProcessBuilder(MainJam.pathToYTDLP, "-x", "-f", "mp4", "-o", new File(outputDir, videoTitle.replace("/", "") + ".mp4").getAbsolutePath(), videoPrompt);  
 
             pb.redirectErrorStream(true);// combine stderr and stdout
+            pb.inheritIO();
             Process process = pb.start();
             int exitCode = process.waitFor();
             if (exitCode != 0 && exitCode != 1) {
@@ -66,6 +66,7 @@ public class SongGrabber extends SongUtils {
     		ProcessBuilder pb = new ProcessBuilder(playlistDownloadLine);
     		
     		pb.redirectErrorStream(true);
+            pb.inheritIO();
     		Process process = pb.start();
     		int exitCode = process.waitFor();
     		

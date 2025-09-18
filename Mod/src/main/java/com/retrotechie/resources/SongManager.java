@@ -103,4 +103,8 @@ public class SongManager {
 			soundSystem.play(QueueID);
 		}
 	}
+	public static void setVolume(int Volume){
+		SoundSystem soundSystem = getSoundSystem();
+		soundSystem.setVolume(QueueID, Volume);
+	}
 }

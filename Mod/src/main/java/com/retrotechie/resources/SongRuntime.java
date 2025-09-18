@@ -43,6 +43,7 @@ public class SongRuntime {
 			}).start();
 	}
 	
+	@SuppressWarnings("null")
 	public static void getOGGPlaylist(String URL) {
 		SongUtils utils = new SongGrabber();
 		Future<List<File>> futureMP4s = utils.downloadPlaylist(URL,"IDK");
@@ -110,6 +111,7 @@ public class SongRuntime {
 		});
 	}
 	
+	@SuppressWarnings("null")
 	public static Future<List<File>> convertPlaylist(List<File> inputFiles) {
         return executor.submit(() -> {
         	List<String> VideoIDs = null;

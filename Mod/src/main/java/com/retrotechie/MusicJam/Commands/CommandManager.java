@@ -1,10 +1,7 @@
 package com.retrotechie.MusicJam.Commands;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -20,17 +17,6 @@ public class CommandManager extends CommandBase {
 
     static CommandRegistry registry = new CommandRegistry();
     
-    
-    private final Map<String, ICommandHandler> subcommands = new HashMap<>();
-    
-   // public static ICommandSender getCommandSender(ICommandSender commandSender) {
-    //}
-    
-    // List all registered commands
-    public void listCommands() {
-    	System.out.println("Available Commands: " + subcommands.keySet());
-    }
-    
     public void registerSubcommands() {
         //Register all subcommands for overarching command
         Clear.register(registry);
@@ -38,23 +24,12 @@ public class CommandManager extends CommandBase {
         Volume.register(registry);
         Pause.register(registry);
         Resume.register(registry);
+        Config.register(registry);
+        Shuffle.register(registry);
+        
         isRegistered = true;
     }
-
-    
-//    
-//    
-//    public CommandManager() {
-//        subcommands.put("play", this::playSong);
-//        subcommands.put("list", this::playPlaylist);
-//        subcommands.put("resume", this::resumeSong);
-//        subcommands.put("pause", this::pauseSong);
-//        subcommands.put("volume", this::setVolume);
-//        subcommands.put("config", this::getConfig);
-//        subcommands.put("clear", this::clearSongs);
-//        subcommands.put("shuffle", this::toggleShuffle);
-//    }
-//	
+	
 	@Override
 	public boolean canCommandSenderUseCommand(ICommandSender icommandsender) {
 	//	getCommandSender(icommandsender);
@@ -79,10 +54,7 @@ public class CommandManager extends CommandBase {
 			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "No arguments were entered, please try again!"));
 			return;
 		}
-		System.out.println("Args: " + args[0].toString());
-
 		if(args.length >= 1 && isRegistered) {	
-			System.out.println("Args: " + args.toString());
 			registry.execute(args, commandSender);
 		} else {
 			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "The following arguments were not recognized: " + EnumChatFormatting.BOLD + args[0]));
@@ -100,15 +72,6 @@ public class CommandManager extends CommandBase {
     private interface ICommandHandler {
         void execute(ICommandSender sender, String[] args);
     }
-    
-    private void getConfig(ICommandSender commandSender, String[] args) {
-		commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.GRAY + "====================================\n" + EnumChatFormatting.DARK_AQUA + "Config is currently unavailable!\n" + EnumChatFormatting.GRAY + "===================================="));
-    }
-    
-
-    
-
-    
 
 
 }

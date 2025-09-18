@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
 
-import net.minecraft.command.ICommandSender;
-
 import java.util.Arrays;
 
 public class Command {
@@ -27,9 +25,6 @@ public class Command {
 
     // Execute command or delegate to subcommands
     public void execute(String[] args) {
-    	for (int i = 0; i < args.length; i++) {
-    		System.out.println("Arg #" + i + ": " + args[i].toString());
-    	}
         if (args.length > 0) {
             Command sub = subcommands.get(args[0]);
             if (sub != null) {
@@ -49,5 +44,9 @@ public class Command {
 
     public String getName() {
         return name;
+    }
+    
+    public String getDescription() {
+    	return description;
     }
 }

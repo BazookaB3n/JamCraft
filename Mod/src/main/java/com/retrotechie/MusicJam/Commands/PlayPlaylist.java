@@ -7,6 +7,7 @@ public class PlayPlaylist {
 		Command volume = new Command("volume", "Changes the volume of the audio being played", (args) -> {
 		
 		});
+		registry.register(volume);
 	}
 
 	   
