@@ -67,10 +67,11 @@ public class MainJam
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+    	manager.registerSubcommands();
 		// some example code
         //System.out.println("[" + MODID + " " + VERSION + " - LOADING" +  "]" + " Initializing " + MODID + " On Version " + VERSION);
         FMLLog.getLogger().info("[" + MODID + " " + VERSION + " - LOADING" +  "]" + " Initializing " + MODID + " On Version " + VERSION);
-        ClientCommandHandler.instance.registerCommand(new ModCommandManager());
+        ClientCommandHandler.instance.registerCommand(new CommandManager());
     }
     
     

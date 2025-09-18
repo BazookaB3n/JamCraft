@@ -9,6 +9,7 @@ import net.minecraft.util.EnumChatFormatting;
 public class Play {
 	public static void register(CommandRegistry registry, ICommandSender commandSender) {
 		Command play = new Command("play", "Adds a song to the queue!", (args) -> {
+			System.out.println("Args for play subcommand: " + args[0]);
 			if(args.length > 1) {
 				if(args[1].toLowerCase().contains("youtube.com/watch") && !args[1].contains("&")) {
 					SongRuntime.getOGG(args[1]);
@@ -22,6 +23,7 @@ public class Play {
 					return;
 				}
 		});
+		registry.register(play);
 	}
 //    private void playSong(ICommandSender commandSender, String[] args) {			
 //		if(args.length > 1) {

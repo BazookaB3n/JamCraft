@@ -15,7 +15,9 @@ import net.minecraft.util.EnumChatFormatting;
 
 public class CommandManager extends CommandBase {
 	
-    String[] cmdAliases = {"jc", "jam", "jcraft"};
+	static boolean isRegistered = false;
+	
+	String[] cmdAliases = {"jc", "jam", "jcraft"};
 
     static CommandRegistry registry = new CommandRegistry();
     
@@ -27,11 +29,16 @@ public class CommandManager extends CommandBase {
     	System.out.println("Available Commands: " + subcommands.keySet());
     }
     
-    public static void registerSubcommands() {
+    public void registerSubcommands() {
     	ICommandSender commandSender = null;
         
         //Register all subcommands for overarching command
         Clear.register(registry, commandSender);
+        Play.register(registry, commandSender);
+        Volume.register(registry, commandSender);
+        Pause.register(registry, commandSender);
+        Resume.register(registry, commandSender);
+        isRegistered = true;
     }
 
     
@@ -71,10 +78,11 @@ public class CommandManager extends CommandBase {
 			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "No arguments were entered, please try again!"));
 			return;
 		}
-		
-        ICommandHandler handler = subcommands.get(args[0].toLowerCase());
-		if(args.length >= 1 && handler != null) {	
-			handler.execute(commandSender, args);
+		System.out.println("Args: " + args[0].toString());
+
+		if(args.length >= 1 && isRegistered) {	
+			System.out.println("Args: " + args.toString());
+			registry.execute(args);
 		} else {
 			commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "Welcome To JamCraft! \n" + EnumChatFormatting.DARK_RED + "The following arguments were not recognized: " + EnumChatFormatting.BOLD + args[0]));
 		}

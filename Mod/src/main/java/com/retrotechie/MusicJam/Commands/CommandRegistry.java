@@ -11,15 +11,14 @@ public class CommandRegistry {
         commands.put(command.getName(), command);
     }
 
-    public void execute(String input) {
-        String[] parts = input.trim().split("\\s+");
-        if (parts.length == 0) return;
+    public void execute(String[] input) {
+        if (input.length == 0) return;
 
-        Command cmd = commands.get(parts[0]);
+        Command cmd = commands.get(input[0].toLowerCase());
         if (cmd != null) {
-            cmd.execute(Arrays.copyOfRange(parts, 1, parts.length));
+            cmd.execute(Arrays.copyOfRange(input, 1, input.length));
         } else {
-            System.out.println("Unknown command: " + parts[0]);
+            System.out.println("Unknown command: " + input[0].toLowerCase());
         }
     }
 
