@@ -2,6 +2,9 @@ package com.retrotechie.MusicJam.Commands;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import net.minecraft.command.ICommandSender;
+
 import java.util.Arrays;
 
 public class CommandRegistry {
@@ -11,12 +14,12 @@ public class CommandRegistry {
         commands.put(command.getName(), command);
     }
 
-    public void execute(String[] input) {
+    public void execute(String[] input, ICommandSender commandSender) {
         if (input.length == 0) return;
 
         Command cmd = commands.get(input[0].toLowerCase());
         if (cmd != null) {
-            cmd.execute(Arrays.copyOfRange(input, 1, input.length));
+            cmd.execute(Arrays.copyOfRange(input, 1, input.length), commandSender);
         } else {
             System.out.println("Unknown command: " + input[0].toLowerCase());
         }

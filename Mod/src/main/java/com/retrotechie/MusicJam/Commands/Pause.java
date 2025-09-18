@@ -1,21 +1,22 @@
 package com.retrotechie.MusicJam.Commands;
 
+import com.retrotechie.resources.MessageHelper;
 import com.retrotechie.resources.SongManager;
 
-import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 public class Pause {
-	public static void register(CommandRegistry registry, ICommandSender commandSender) {
+	public static void register(CommandRegistry registry) {
 		Command pause = new Command("pause", "Pauses the song being played, unless it is already paused.", (args) -> {
 			if(SongManager.paused) {
-				commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "♫ Song resumed! ♫"));
+				MessageHelper.sendChatMessage(new ChatComponentText(EnumChatFormatting.DARK_AQUA + "♫ Song resumed! ♫"));
 				SongManager.resumeSong();
 			} else {
-				commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "♫ Song paused! ♫"));
+				MessageHelper.sendChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "♫ Song paused! ♫"));
 				SongManager.pauseSong();
 			}
 		});
+		registry.register(pause);
 	}
 }

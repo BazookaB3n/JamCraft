@@ -2,15 +2,15 @@ package com.retrotechie.MusicJam.Commands;
 
 import java.io.File;
 
+import com.retrotechie.resources.MessageHelper;
 import com.retrotechie.resources.SongGrabber;
 import com.retrotechie.resources.SongRuntime;
 
-import net.minecraft.command.ICommandSender;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 
 public class Clear {
-	public static void register(CommandRegistry registry, ICommandSender commandSender) {
+	public static void register(CommandRegistry registry) {
 		Command clear = new Command("clear", "Clears files based on certain parameters.", (args) -> {
 			if(args.length > 1) {
 	    		if(args[1].toLowerCase().equals("all"))     {
@@ -51,13 +51,14 @@ public class Clear {
 					    	}
 					    }
 					} catch (NumberFormatException e) {
-						commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "Invalid Arguments! Please enter a numeric value!"));
+						MessageHelper.sendChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "Invalid Arguments! Please enter a numeric value!"));
 					}
 	    		}
 	    	} else {
-				commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "Please enter the number of cached files to delete. \n" + EnumChatFormatting.DARK_AQUA + "Write \"all\" to delete all cached files."));
+	    		MessageHelper.sendChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "Please enter the number of cached files to delete. \n" + EnumChatFormatting.DARK_AQUA + "Write \"all\" to delete all cached files."));
 	    	}
 		});	
+		registry.register(clear);
 	}
 //	public void clearSongs(ICommandSender commandSender, String[] args) {
 //    	commandSender.addChatMessage(new ChatComponentText(EnumChatFormatting.DARK_RED + "This command can only delete files from previous sessions! \n" + EnumChatFormatting.BOLD + EnumChatFormatting.RED + "To remove files from this session, relaunch the game. "));

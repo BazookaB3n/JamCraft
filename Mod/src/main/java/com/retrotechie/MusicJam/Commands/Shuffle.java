@@ -1,9 +1,7 @@
 package com.retrotechie.MusicJam.Commands;
 
-import net.minecraft.command.ICommandSender;
-
 public class Shuffle {
-	public static void register(CommandRegistry registry, ICommandSender commandSender) {
+	public static void register(CommandRegistry registry) {
 		Command volume = new Command("volume", "Changes the volume of the audio being played", (args) -> {
 		
 		});
