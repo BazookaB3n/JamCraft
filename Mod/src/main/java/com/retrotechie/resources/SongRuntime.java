@@ -81,7 +81,7 @@ public class SongRuntime {
 	    	System.out.println("Video file name (FFMPEG): " + videoID);
 				
 	        ProcessBuilder pb = new ProcessBuilder(
-	            MainJam.pathToFFMPEG,
+	            "\""+MainJam.pathToFFMPEG + "\"",
 	            "-i", inputFile.getAbsolutePath(),
 	            "-vn",
 	            "-y",
