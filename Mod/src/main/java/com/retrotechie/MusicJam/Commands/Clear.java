@@ -2,6 +2,8 @@ package com.retrotechie.MusicJam.Commands;
 
 import java.io.File;
 
+import com.retrotechie.MusicJam.Utilities.Command;
+import com.retrotechie.MusicJam.Utilities.CommandRegistry;
 import com.retrotechie.resources.MessageHelper;
 import com.retrotechie.resources.SongGrabber;
 import com.retrotechie.resources.SongRuntime;

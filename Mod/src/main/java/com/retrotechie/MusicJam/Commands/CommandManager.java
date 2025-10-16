@@ -2,6 +2,9 @@ package com.retrotechie.MusicJam.Commands;
 
 import java.util.Arrays;
 import java.util.List;
+
+import com.retrotechie.MusicJam.Utilities.CommandRegistry;
+
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -26,7 +29,7 @@ public class CommandManager extends CommandBase {
         Resume.register(registry);
         Config.register(registry);
         Shuffle.register(registry);
-        
+        Search.register(registry);
         isRegistered = true;
     }
 	

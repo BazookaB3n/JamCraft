@@ -1,5 +1,7 @@
 package com.retrotechie.MusicJam.Commands;
 
+import com.retrotechie.MusicJam.Utilities.CommandRegistry;
+
 import net.minecraft.command.ICommandSender;
 
 public class PlayPlaylist {

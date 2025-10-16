@@ -1,6 +1,8 @@
 package com.retrotechie.MusicJam.Commands;
 
 import com.retrotechie.MusicJam.MainJam;
+import com.retrotechie.MusicJam.Utilities.Command;
+import com.retrotechie.MusicJam.Utilities.CommandRegistry;
 import com.retrotechie.resources.MessageHelper;
 import com.retrotechie.resources.SongManager;
 

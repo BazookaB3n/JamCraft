@@ -1,4 +1,4 @@
-package com.retrotechie.MusicJam.Commands;
+package com.retrotechie.MusicJam.Utilities;
 
 import java.util.HashMap;
 import java.util.Map;
