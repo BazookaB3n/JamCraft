@@ -15,3 +15,4 @@ Some planned features include: <ul>
 <hr>
 I am looking to get this project into beta at some point in the near future. Also, feel free to send your suggestions to me, I'm always open to ideas!
 <br>
+<p>    Copyright (C) 2025 BazookaB3n </p>
