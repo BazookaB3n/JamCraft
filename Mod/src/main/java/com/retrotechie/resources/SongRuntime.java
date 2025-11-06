@@ -79,7 +79,8 @@ public class SongRuntime {
 	    	String videoID = inputFile.getName();
 	    	videoID = videoID.replace(".mp4", "");
 	    	System.out.println("Video file name (FFMPEG): " + videoID);
-				
+            File output = new File(outputDir, videoID + ".ogg");
+            if(output.createNewFile()) {
 	        ProcessBuilder pb = new ProcessBuilder(
 	            "\""+MainJam.pathToFFMPEG + "\"",
 	            "-i", inputFile.getAbsolutePath(),
@@ -88,7 +89,7 @@ public class SongRuntime {
 	            "-acodec", "libvorbis",
 	            "-ar", "44100",
 	            "-ac", "2",
-	            new File(outputDir, videoID + ".ogg").getAbsolutePath()
+	            output.getAbsolutePath()
 	        );
 	        pb.inheritIO();
 	        Process p = pb.start();
@@ -108,6 +109,9 @@ public class SongRuntime {
             }
 
             return result; //Return the .ogg file
+            } else {
+            	System.out.println("ERROR CONVERTING TO OGG");
+            }
 		});
 	}
 	
