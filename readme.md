@@ -14,5 +14,7 @@ Some planned features include: <ul>
 </ul>
 <hr>
 I am looking to get this project into beta at some point in the near future. Also, feel free to send your suggestions to me, I'm always open to ideas!
+
+<p> I am currently working on a datapack project and am looking to get that wrapped up before continuing this project. I will be back to coding in the near future</p>
 <br>
 <p>    Copyright (C) 2025 BazookaB3n </p>
