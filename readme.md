@@ -17,4 +17,4 @@ I am looking to get this project into beta at some point in the near future. Als
 
 <p> I am currently working on a datapack project and am looking to get that wrapped up before continuing this project. I will be back to coding in the near future</p>
 <br>
-<p>    Copyright (C) 2025 BazookaB3n </p>
+<p>    Copyright (C) 2026 BazookaB3n </p>
